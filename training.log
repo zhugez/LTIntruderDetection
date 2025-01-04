@@ -1,0 +1,93 @@
+
+2025-01-04 00:25:34,901 - INFO - Starting training pipeline...
+2025-01-04 00:25:34,917 - INFO - Using device: cuda
+2025-01-04 00:25:34,917 - INFO - Number of GPUs available: 1
+2025-01-04 00:25:34,917 - INFO - Using single device training...
+The tokenizer class you load from this checkpoint is not the same type as the class this function is called from. It may result in unexpected tokenization.
+The tokenizer class you load from this checkpoint is 'DistilBertTokenizer'.
+The class this function is called from is 'CustomDistilBertTokenizer'.
+2025-01-04 00:25:35,565 - INFO - Starting training pipeline
+2025-01-04 00:25:35,566 - INFO - Initializing data preprocessor...
+2025-01-04 00:25:35,781 - INFO - Loaded data with columns: ['Class', 'Method', 'Host-Header', 'Connection', 'Accept', 'Accept-Charset', 'Accept-Language', 'Cache-control', 'Pragma', 'User-Agent', 'Content-Type', 'POST-Data', 'GET-Query']
+2025-01-04 00:25:39,223 - INFO - Encoded 2 unique classes
+2025-01-04 00:25:39,223 - INFO - Setting up model trainer...
+Some weights of DistilBertForSequenceClassification were not initialized from the model checkpoint at distilbert-base-uncased and are newly initialized: ['classifier.bias', 'classifier.weight', 'pre_classifier.bias', 'pre_classifier.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+2025-01-04 00:25:40,036 - INFO - Note: Classifier layers are initialized randomly as expected
+2025-01-04 00:25:40,036 - INFO - Memory efficient attention not available
+/root/LTIntruderDetection/ModelTrainer.py:59: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  self.scaler = torch.cuda.amp.GradScaler()
+2025-01-04 00:25:40,304 - INFO - Starting model training...
+2025-01-04 00:25:40,305 - INFO - Number of samples: 84957
+2025-01-04 00:25:40,305 - INFO - Number of unique labels: 2
+2025-01-04 00:25:40,306 - INFO - Label distribution: [38670 46287]
+2025-01-04 00:25:40,306 - INFO - Processing 84957 samples...
+Processing texts: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 85/85 [00:19<00:00,  4.27it/s]
+2025-01-04 00:26:00,282 - INFO - Created dataloaders - Train: 2124 batches, Val: 531 batches
+2025-01-04 00:26:00,284 - INFO - Initialized optimizer with learning rates:
+2025-01-04 00:26:00,284 - INFO - Group 0 learning rate: 2e-05
+2025-01-04 00:26:00,285 - INFO - Group 1 learning rate: 0.0002
+2025-01-04 00:26:00,285 - INFO - Initialized scheduler with 10620 warmup steps
+2025-01-04 00:26:00,285 - INFO - Starting training on cuda
+2025-01-04 00:26:00,285 - INFO - Starting epoch with learning rate: 0.0
+Training:   0%|                                                                                                                                                    | 0/2124 [00:00<?, ?it/s]/root/LTIntruderDetection/ModelTrainer.py:170: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast():
+Training: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2124/2124 [04:22<00:00,  8.08it/s]
+2025-01-04 00:31:12,993 - INFO - Epoch 1/50 - Train Loss: 0.6836 - Train Acc: 0.5701 - Val Loss: 0.6785 - Val Acc: 0.5848 - LR: 0.000004
+2025-01-04 00:31:13,923 - INFO - Model and tokenizer saved to best_model
+2025-01-04 00:31:13,923 - INFO - New best model saved! (Val Acc: 0.5848)
+2025-01-04 00:31:13,923 - INFO - Starting epoch with learning rate: 4.000000000000001e-06
+Training: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2124/2124 [04:22<00:00,  8.10it/s]
+2025-01-04 00:36:25,829 - INFO - Epoch 2/50 - Train Loss: 0.6810 - Train Acc: 0.5805 - Val Loss: 0.6784 - Val Acc: 0.5848 - LR: 0.000008
+2025-01-04 00:36:25,829 - INFO - Early stopping counter: 1/7
+2025-01-04 00:36:25,830 - INFO - Starting epoch with learning rate: 8.000000000000001e-06
+Training: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2124/2124 [04:22<00:00,  8.10it/s]
+2025-01-04 00:41:37,620 - INFO - Epoch 3/50 - Train Loss: 0.6801 - Train Acc: 0.5829 - Val Loss: 0.6792 - Val Acc: 0.5855 - LR: 0.000012
+2025-01-04 00:41:38,525 - INFO - Model and tokenizer saved to best_model
+2025-01-04 00:41:38,525 - INFO - New best model saved! (Val Acc: 0.5855)
+2025-01-04 00:41:38,526 - INFO - Starting epoch with learning rate: 1.2e-05
+Training: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2124/2124 [04:22<00:00,  8.11it/s]
+2025-01-04 00:46:50,341 - INFO - Epoch 4/50 - Train Loss: 0.6805 - Train Acc: 0.5797 - Val Loss: 0.6795 - Val Acc: 0.5857 - LR: 0.000016
+2025-01-04 00:46:51,255 - INFO - Model and tokenizer saved to best_model
+2025-01-04 00:46:51,255 - INFO - New best model saved! (Val Acc: 0.5857)
+2025-01-04 00:46:51,256 - INFO - Starting epoch with learning rate: 1.6000000000000003e-05
+Training:  90%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▉             | 1921/2124 [03:56<00:25,  8.11it/s]Training:  91%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▎            | 1927/2124 [03:57<00:24,  8.11it/s]Training:  91%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▊            | 1936/2124 [03:58<00:23,  8.11it/s]Training: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2124/2124 [04:22<00:00,  8.10it/s]
+2025-01-04 00:52:03,087 - INFO - Epoch 5/50 - Train Loss: 0.6802 - Train Acc: 0.5835 - Val Loss: 0.6781 - Val Acc: 0.5857 - LR: 0.000020
+2025-01-04 00:52:03,088 - INFO - Early stopping counter: 1/7
+2025-01-04 00:52:03,089 - INFO - Starting epoch with learning rate: 2e-05
+Training: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2124/2124 [04:22<00:00,  8.10it/s]
+2025-01-04 00:57:14,802 - INFO - Epoch 6/50 - Train Loss: 0.6798 - Train Acc: 0.5831 - Val Loss: 0.6784 - Val Acc: 0.5857 - LR: 0.000020
+2025-01-04 00:57:14,803 - INFO - Early stopping counter: 2/7
+2025-01-04 00:57:14,803 - INFO - Starting epoch with learning rate: 1.9975640502598243e-05
+Training: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2124/2124 [04:22<00:00,  8.10it/s]
+2025-01-04 01:02:26,359 - INFO - Epoch 7/50 - Train Loss: 0.6804 - Train Acc: 0.5819 - Val Loss: 0.6787 - Val Acc: 0.5851 - LR: 0.000020
+2025-01-04 01:02:26,359 - INFO - Early stopping counter: 3/7
+2025-01-04 01:02:26,360 - INFO - Starting epoch with learning rate: 1.9902680687415704e-05
+Training: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2124/2124 [04:22<00:00,  8.11it/s]
+2025-01-04 01:07:37,901 - INFO - Epoch 8/50 - Train Loss: 0.6803 - Train Acc: 0.5819 - Val Loss: 0.6788 - Val Acc: 0.5853 - LR: 0.000020
+2025-01-04 01:07:37,902 - INFO - Early stopping counter: 4/7
+2025-01-04 01:07:37,902 - INFO - Starting epoch with learning rate: 1.9781476007338058e-05
+Training: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2124/2124 [04:22<00:00,  8.10it/s]
+2025-01-04 01:12:49,441 - INFO - Epoch 9/50 - Train Loss: 0.6804 - Train Acc: 0.5810 - Val Loss: 0.6785 - Val Acc: 0.5853 - LR: 0.000020
+2025-01-04 01:12:49,442 - INFO - Early stopping counter: 5/7
+2025-01-04 01:12:49,443 - INFO - Starting epoch with learning rate: 1.961261695938319e-05
+Training: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2124/2124 [04:22<00:00,  8.11it/s]
+2025-01-04 01:18:00,885 - INFO - Epoch 10/50 - Train Loss: 0.6800 - Train Acc: 0.5823 - Val Loss: 0.6783 - Val Acc: 0.5853 - LR: 0.000019
+2025-01-04 01:18:00,886 - INFO - Early stopping counter: 6/7
+2025-01-04 01:18:00,887 - INFO - Starting epoch with learning rate: 1.9396926207859085e-05
+Training: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2124/2124 [04:22<00:00,  8.11it/s]
+2025-01-04 01:23:12,297 - INFO - Epoch 11/50 - Train Loss: 0.6799 - Train Acc: 0.5823 - Val Loss: 0.6785 - Val Acc: 0.5853 - LR: 0.000019
+2025-01-04 01:23:12,297 - INFO - Early stopping counter: 7/7
+2025-01-04 01:23:12,297 - INFO - Early stopping triggered!
+The tokenizer class you load from this checkpoint is not the same type as the class this function is called from. It may result in unexpected tokenization.
+The tokenizer class you load from this checkpoint is 'CustomDistilBertTokenizer'.
+The class this function is called from is 'DistilBertTokenizer'.
+2025-01-04 01:23:12,421 - INFO - Model and tokenizer loaded from best_model
+2025-01-04 01:23:13,737 - INFO - Training history plot saved to training_history.png
+2025-01-04 01:23:13,771 - INFO - Training completed successfully
+2025-01-04 01:23:13,802 - INFO - Saving model artifacts...
+2025-01-04 01:23:14,312 - INFO - Model and tokenizer saved to saved_model
+2025-01-04 01:23:14,417 - INFO - Training history plot saved to training_history.png
+2025-01-04 01:23:14,417 - INFO - Artifacts saved successfully
+2025-01-04 01:23:14,418 - INFO - Training pipeline completed successfully
+2025-01-04 01:23:14,426 - INFO - Training completed successfully!

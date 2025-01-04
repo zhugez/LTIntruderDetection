@@ -3,12 +3,12 @@ from pathlib import Path
 import logging
 from typing import Optional, Dict, List, Tuple, Any
 import pandas as pd
+import numpy as np
+from sklearn.preprocessing import LabelEncoder
+from transformers import DistilBertForSequenceClassification, AdamW, DistilBertTokenizer
+from nltk.tokenize import RegexpTokenizer
 import torch
 from torch.utils.data import DataLoader, TensorDataset, random_split
-from transformers import DistilBertForSequenceClassification, AdamW, DistilBertTokenizer
-from sklearn.preprocessing import LabelEncoder
-from nltk.tokenize import RegexpTokenizer
-import numpy as np
 
 # Configure logging
 logging.basicConfig(
@@ -17,15 +17,54 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
+class CustomDistilBertTokenizer(DistilBertTokenizer):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Regex pattern to split and process tokens by ":"
+        self.custom_tokenizer = RegexpTokenizer(r"[\w\-]+|[:=]|.+?(?=,|$)")
+
+    def tokenize(self, text, **kwargs):
+        """
+        Tokenizes the input text using custom logic and splits by ":".
+        """
+        tokens = self.custom_tokenizer.tokenize(text)
+        processed_tokens = [
+            processed for token in tokens if (processed := self.process_token(token))
+        ]
+        return [
+            item
+            for sublist in processed_tokens
+            for item in (sublist if isinstance(sublist, list) else [sublist])
+        ]
+
+    def process_token(self, token):
+        """
+        Processes tokens and handles ":" as a separator.
+        """
+        if token == ":":
+            return None  # Skip ":" but ensure it's recognized as a separator
+
+        if ":" in token:
+            key, value = token.split(":", 1)
+            return [key.strip(), value.strip()]
+
+        return [token]
+
+    def convert_tokens_to_ids(self, tokens):
+        """
+        Converts tokens to IDs using the parent's method.
+        """
+        return super().convert_tokens_to_ids(tokens)
+
+
 @dataclass
 class DataPreprocessor:
     """Handles data preprocessing for intrusion detection."""
 
-    def __init__(self, file_path: Path | str):
-        self.file_path = Path(file_path)
-        self.data: Optional[pd.DataFrame] = None
-        self.label_encoder = LabelEncoder()
-        self.tokenizer = RegexpTokenizer(r"\w+|\$[\d\.]+|\S+")
+    file_path: Path
+    tokenizer: CustomDistilBertTokenizer
+    label_encoder: LabelEncoder = LabelEncoder()
+    data: Optional[pd.DataFrame] = None
 
     def load_data(self) -> pd.DataFrame:
         """Load and validate data from CSV file."""

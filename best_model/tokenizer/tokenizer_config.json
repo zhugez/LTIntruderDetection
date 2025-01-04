@@ -50,9 +50,11 @@
   "model_max_length": 512,
   "never_split": null,
   "pad_token": "[PAD]",
+  "padding": true,
   "sep_token": "[SEP]",
   "strip_accents": null,
   "tokenize_chinese_chars": true,
-  "tokenizer_class": "DistilBertTokenizer",
+  "tokenizer_class": "CustomDistilBertTokenizer",
+  "truncation": true,
   "unk_token": "[UNK]"
 }
